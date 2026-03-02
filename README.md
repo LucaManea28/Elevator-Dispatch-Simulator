@@ -68,14 +68,76 @@ POST /api/reset
 }
 ```
 
+## Example: Execution
+
+### External Call Command
+
+```bash
+curl -X POST "http://localhost:8080/api/call" \
+  -H "Content-Type: application/json" \
+  -d "{\"floor\":7,\"dir\":\"UP\",\"scheduler\":\"simple\"}"
+  
+  
+### Initial Status
+
+## After External Call – Status
+
+```json
+[
+  {
+    "id": 1,
+    "currentFloor": 7,
+    "state": "IDLE",
+    "direction": "UP"
+  },
+  {
+    "id": 2,
+    "currentFloor": 0,
+    "state": "IDLE",
+    "direction": "UP"
+  },
+  {
+    "id": 3,
+    "currentFloor": 0,
+    "state": "IDLE",
+    "direction": "UP"
+  }
+]
+```
+
+## After External Call – Metrics
+
+```json
+{
+  "totalRequests": 1,
+  "servicedRequests": 1,
+  "totalWaitMs": 3255,
+  "averageWaitMs": 3255.0
+}
+```
+
+
+## Scheduler Comparison (Simple vs Queue)
+
+Benchmark configuration: `rate=3 req/s`, `duration=10s`, `floors=13`, `elevators=3`.
+
+| Scheduler| Total Requests | Serviced Requests| Avg Wait (ms)  |
+|----------|----------------|------------------|----------------|
+| Simple   | 30             | 15               | 3639.2         |
+| Queue    | 30             | 15               | 2801.06        |
+
+Notes:
+- Both tests were executed with the same load parameters.
+- Metrics were collected after the test finished.
+
 ## Tech Stack
 
-Java 17+
-Spring Boot
-Maven
-REST API
-Multithreading
-JSON
+- Java 17+
+- Spring Boot
+- Maven
+- REST API
+- Multithreading
+- JSON
 
 ## Run Locally
 
