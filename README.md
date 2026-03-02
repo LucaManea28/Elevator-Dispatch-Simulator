@@ -68,7 +68,7 @@ POST /api/reset
 }
 ```
 
-## Example: Execution
+## Example Execution
 
 ### External Call Command
 
@@ -76,11 +76,9 @@ POST /api/reset
 curl -X POST "http://localhost:8080/api/call" \
   -H "Content-Type: application/json" \
   -d "{\"floor\":7,\"dir\":\"UP\",\"scheduler\":\"simple\"}"
-  
-  
-### Initial Status
+```
 
-## After External Call – Status
+### After External Call – Status
 
 ```json
 [
@@ -105,7 +103,7 @@ curl -X POST "http://localhost:8080/api/call" \
 ]
 ```
 
-## After External Call – Metrics
+### After External Call – Metrics
 
 ```json
 {
